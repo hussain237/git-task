@@ -1,0 +1,84 @@
+This archive contains the current state of my ongoing effort to 
+produce as a complete as possible a scale model of the Solar System.
+
+Archive contains:
+
+1: The nmp file that is passed to the nMod nBody model.
+2: An nbo file containing 5000 days of Solar System motion resulting from running the nmp
+file
+
+The starting state of model is as accurate as I can get it at present to the positions of all included bodies
+on the date 24/08/2008.
+
+Major Bodies:
+		Sol
+		Mercury
+		Venus
+		Earth
+		Mars
+		Jupiter
+		Saturn
+		Uranus
+		Neptune
+
+Moons:
+		Luna (Earths Moon)
+		Ganymede
+		Callisto
+	
+Mear-Earth asteroids:
+		Apophis
+		Eros
+		Itokawa
+		
+Main Belt Asteroids:
+		Ida
+		Ceres
+		Pallas
+		Juno
+		Vesta
+		Astraea
+		Hebe
+		Iris
+		Flora
+		Metis
+		Hygiea
+		Parthenope
+		Victoria
+		Irene
+		Eunomia
+		Psyche
+		Thetis
+		Melpomene
+		Fortuna
+		Massalia
+		Lutetia
+		Kalliope
+		Thalia
+		Themis
+		Phocaea
+		Proserpina
+		Euterpe
+		Bellona
+		Amphitrite
+		Urania
+		Euphrosyne
+		Pomona
+		Circe
+		Leukothea
+		Atalante
+		Fides
+		Ganymed
+		Cybele
+		
+Comets:
+        Comet 1P/Halley
+		
+SpaceCraft:
+		Voyager 1
+		Voyager 2
+		Pioneer 10
+		Pioneer 11
+	
+More information is contained inside the nmp file itself. It is a plain
+text file, so will open in any decent text editor.

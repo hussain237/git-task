@@ -1,0 +1,984 @@
+#  -----------------------------------------
+#  | nMod Reference Solar System Model.    |
+#  | Version 2.7                           |
+#  -----------------------------------------
+#  The Position of the planets, moons, comets, spacecraft and asteroids in this
+#  project file correspond to:
+#  Date: 24/08/2008
+#  Time: 00:00:00
+#
+#  Co-ordinates are in Meters
+#  Velocities are in Meters per Second
+#  Origin is Solar System Barycenter. All bodies in this model are positioned
+#  relative to this origin.
+#
+#  Radius is 1 for most asteroids, if you want to use the real radius
+#  in your experiments you will need to change them yourself. The reference
+#  version of nmod doesn't use the radius value. 
+# 
+#
+# At the moment quite a few Asteroid masses are estimates. I'm working on resolving this issue.
+#
+######################################################
+######################################################
+###              nBODY SPECIFIC SETTINGS           ###
+######################################################
+######################################################
+#
+# the filename for the *.nbo file that 
+# will store the time series result data
+# leave off the nbo file extension in this version
+# 
+output filename reference_project
+#
+# the number of particles in this project
+#
+particle population 58
+#
+# how many states do you want to record?
+#
+states required 10
+# 	
+# and how many steps will occur between states?
+#
+step count 1440
+#
+# the number of seconds in a single step
+#
+step size 60
+#
+#
+# specify the integration method to use
+# choices are:
+#             RK4
+#             Runge Kutta Fourth Order Integration. This is the most
+#             accurate integration method in nMod
+#
+#             MidPoint
+#             Mid Point integration method. This is a less accurate 
+#             integration method, but very fast, and useful for 
+#             simulations where accuracy is slightly less important.
+#
+#
+integration method MidPoint
+#
+# the gravitational constant used by nMod.
+# Research is always improving this measure
+# so it isn't hard coded, and you should
+# avoid changing nMod to hard code it
+#
+gravitational constant 6.674040E-11
+#
+# Set the particle, if any, that is to be held still and 
+# used as collapsor. In this model we set Sol as the Collapsor (0).
+# At the moment Sols true orbital position and Velocity are not included.
+# Note that to keep a central reference point, you can always 
+# give the collapsor insignificant mass
+#
+collapsor defined 0
+#
+#
+# State how many items of information exist for each particle.
+# This value should not be changed unless you add more data to 
+# single particles, and change the particle data structure and
+# singl particle reading function
+#
+particle info_size 14
+#
+#
+# if we are going to write a time series to an nbo file, set this to TRUE, else FALSE
+#
+nbo recording FALSE
+#
+# option to say whether nMod outputs text to stdout,
+# or not.
+# Default = TRUE, change to FALSE to disable stdout output
+# (enables things like using nohup, does not effect stderr)
+#
+use stdout TRUE
+#
+# Should nMod write out the final state of all particles in the model to an nmp file 
+# at the end of the specified time series? (TRUE or FALSE)
+# 
+write project FALSE
+#
+# if so, use this file ident
+#
+final_conditions filename final_state_conditions
+#
+# end model initialisation information, begin particle data
+# particle data has the following format:
+# 
+# Name of particle
+# Type of particle - used by nBview to give the particle an appropriate 
+#                    looking size. This is not going to be to scale.
+#                massive_3 - Stellar mass objects, Sol
+#                massive_2 - Gas Giant - Jupiter size
+#                massive_1 - Gas Giant - Smaller than Jupoter
+#                major_2 - large planet (earth,venus,mars)
+#                major_1 - small planet (mercury)
+#                minor_2 - Moon
+#                minor_1 - Asteroid,Comet,spaceship
+# (RGB vals for the particle)
+# particle red colour
+# particle green colour
+# particle blue colour
+# free text empty
+# Mass of Particle (equatorial) 
+# Radius of Particle (equatorial)
+# Location on the X plane in meters
+# Location on the Y plane in meters
+# Location on the Z plane in meters
+# velocity on the X plane in meters per second
+# velocity on the Y plane in meters per second
+# velocity on the Z plane in meters per second
+# 
+# 
+<particles>
+particle ident Sol
+particle type massive_3
+particle red 238
+particle green 238
+particle blue 0
+free text empty
+particle mass 1.989100E+30
+particle radius 6.950000E+05
+X position 0.0
+Y position 0.0
+Z position 0.0
+X velocity 0.0
+Y velocity 0.0
+Z velocity 0.0
+particle ident Mercury
+particle type minor_2
+particle red 255
+particle green 222
+particle blue 156
+free text empty
+particle mass 3.302E+23
+particle radius 2.440E+06
+X position -5.821615456150769E+10
+Y position -2.830106330222192E+09
+Z position 5.489367558083519E+09
+X velocity -7.852701387085467E+03
+Y velocity -4.602894196331046E+04
+Z velocity -2.875598134571757E+03
+particle ident Venus
+particle type major_1
+particle red 220
+particle green 176
+particle blue 111
+free text empty
+particle mass 48.685E+23
+particle radius 6.0518E+06
+X position -9.631862163939662E+10
+Y position 4.550108457884260E+10
+Z position 6.063524106957864E+09
+X velocity -1.510653320654692E+04
+Y velocity -3.185165845516286E+04
+Z velocity 6.314804795557265E+02
+particle ident Earth
+particle type major_2
+particle red 1
+particle green 57
+particle blue 217
+free text empty
+particle mass 5.973600E+24
+particle radius 6.371E+06
+X position -8.763622878061567E+09
+Y position 1.464211383654092E+11
+Z position 6.627634039492160E+08
+X velocity -3.025084670211016E+04
+Y velocity -1.972406240070901E+03
+Z velocity -1.103585425003040E+01
+particle ident Moon
+particle type minor_1
+particle red 10
+particle green 103
+particle blue 106
+free text empty
+particle mass 7.349000E+22
+particle radius 1.737530E+06
+X position -8.523903250756547E+09
+Y position 1.460981944863684E+11
+Z position 6.555958730282411E+08
+X velocity -2.948383365889115E+04
+Y velocity -1.370503914880251E+03 
+Z velocity 7.926684108954696E+01
+particle ident Asteroid_99942_Apophis
+particle type minor_1
+particle red 255
+particle green 25
+particle blue 25
+free text empty
+particle mass 2.1e+10
+particle radius 125
+X position -9.698903774857521E+10
+Y position 1.292056644126621E+11
+Z position -9.146500635637254E+09
+X velocity -2.231270403157814E+04 
+Y velocity -1.372356939741989E+04
+Z velocity 1.900237480812530E+02
+particle ident Asteroid_433_Eros
+particle type minor_1
+particle red 255
+particle green 25
+particle blue 25
+free text empty
+particle mass 7.2E+18
+particle radius 9000
+X position -1.670183289448947E+11
+Y position 5.553414000846045E+10
+Z position -2.042672393587016E+10
+X velocity -1.205188450461847E+04
+Y velocity -2.692800248684130E+04
+Z velocity -4.809680793155813E+03
+particle ident Asteroid_25143_Itokawa
+particle type minor_1
+particle red 255
+particle green 25
+particle blue 25
+free text empty
+particle mass 3.58E+10 
+particle radius 1
+X position -1.184479283346372E+11
+Y position 1.578653854825412E+11
+Z position 4.709215068476923E+09
+X velocity -1.560927358431765E+04
+Y velocity -2.088157745945970E+04
+Z velocity 2.017944754155900E+02
+particle ident Mars
+particle type major_1
+particle red 148
+particle green 49
+particle blue 24
+free text empty
+particle mass 6.4219E+23 
+particle radius 3.3899E+06
+X position -2.242099110661761E+11
+Y position -8.987151833815391E+10
+Z position 3.596841266712055E+09
+X velocity 9.978663632868374E+03
+Y velocity -2.039513724641982E+04
+Z velocity -6.723843516114920E+02
+particle ident Jupiter
+particle type massive_2
+particle red 249
+particle green 146
+particle blue 41
+free text empty
+particle mass 1898.6E+24
+particle radius 6.0268E+07
+X position 2.788378704633741E+11
+Y position -7.191670776542783E+11
+Z position -3.262353095331281E+09
+X velocity 1.201961920275000E+04
+Y velocity 5.342734228720388E+03
+Z velocity -2.912716717644908E+02
+particle ident Ganymede
+particle type minor_1
+particle red 10
+particle green 103
+particle blue 106
+free text empty
+particle mass 1482E+20
+particle radius 2634000
+X position 2.798293640496654E+11
+Y position -7.195664918962947E+11
+Z position -3.265004663682520E+09
+X velocity 1.610653680048356E+04
+Y velocity 1.543478999800238E+04
+Z velocity 1.386981525112594E+02
+particle ident Callisto
+particle type minor_1
+particle red 10
+particle green 103
+particle blue 106
+free text empty
+particle mass 1076E+20
+particle radius 2403000
+X position 2.771921435729551E+11
+Y position -7.182283173117032E+11
+Z position -3.254305972025812E+09
+X velocity 7.958627259314701E+03
+Y velocity -1.717952107610292E+03
+Z velocity -5.731819803212679E+02
+particle ident Saturn
+particle type massive_1
+particle red 157
+particle green 131
+particle blue 96
+free text empty
+particle mass 5.68462313752E+26
+particle radius 6.0268E+07
+X position -1.322502282596553E+12
+Y position 4.453379905084059E+11
+Z position 4.487927026189578E+10
+X velocity -3.596578950091885E+03
+Y velocity -9.175554347978476E+03
+Z velocity 3.022305429891885E+02
+particle ident Uranus
+particle type massive_1
+particle red 62
+particle green 217
+particle blue 219
+free text empty
+particle mass 86.832E+24
+particle radius 2.5559E+07
+X position 2.963455989424174E+12
+Y position -5.042445762635994E+11
+Z position -4.026730083237916E+10
+X velocity 1.092627360021276E+03
+Y velocity 6.396142600530890E+03
+Z velocity 9.951055923222984E+00
+particle ident Neptune 
+particle type massive_1
+particle red 122
+particle green 156
+particle blue 227
+free text empty
+particle mass 102.47E+24
+particle radius 2.4766E+07
+X position 3.577827906239968E+12
+Y position -2.717446896817872E+12
+Z position -2.649279680554676E+10
+X velocity 3.251193084200894E+03
+Y velocity 4.360719388680694E+03
+Z velocity -1.640256489807461E+02
+particle ident Asteroid_1_Ceres
+particle type minor_1
+particle red 180
+particle green 50
+particle blue 255
+free text empty
+particle mass 9.445E+20
+particle radius 1
+X position -1.360378145033865E+11
+Y position 3.628484913153315E+11
+Z position 3.630452696590438E+10
+X velocity -1.715609554847549E+04
+Y velocity -7.758986181404604E+03
+Z velocity 2.918166641448519E+03
+particle ident Asteroid_2_Pallas
+particle type minor_1
+particle red 180
+particle green 50
+particle blue 255
+free text empty
+particle mass 2.2E+20
+particle radius 1
+X position 2.546206841450784E+11
+Y position 2.157897096804019E+11
+Z position -1.698241485990067E+11
+X velocity -1.689908244482754E+04
+Y velocity 8.994091016825426E+03
+Z velocity -4.811793673040944E+03
+particle ident Asteroid_3_Juno
+particle type minor_1
+particle red 180
+particle green 50
+particle blue 255
+free text empty
+particle mass 3E+19
+particle radius 1
+X position 2.497015034898462E+10
+Y position -4.599520222366135E+11
+Z position 1.034303772163078E+11
+X velocity 1.469783132930291E+04
+Y velocity 3.335093602631296E+03
+Z velocity -1.344325390893585E+03
+particle ident Asteroid_4_Vesta
+particle type minor_1
+particle red 180
+particle green 50
+particle blue 255
+free text empty
+particle mass 3E+20
+particle radius 1
+X position 3.437023518002605E+11
+Y position 1.298050118221837E+11
+Z position -4.567921744361527E+10
+X velocity -5.162377069675682E+03
+Y velocity 1.773904280241017E+04
+Z velocity 9.208214282119886E+01
+particle ident Asteroid_5_Astraea
+particle type minor_1
+particle red 180
+particle green 50
+particle blue 255
+free text empty
+particle mass 2.4E+18
+particle radius 1
+X position -2.161190214015943E+11
+Y position -3.075734566326830E+11
+Z position 3.530747887538506E+10
+X velocity 1.311311475867189E+04
+Y velocity -1.360657316724847E+04
+Z velocity 2.383746195150094E+02
+particle ident Asteroid_6_Hebe
+particle type minor_1
+particle red 180
+particle green 50
+particle blue 255
+free text empty
+particle mass 1.4E+19
+particle radius 1
+X position -4.228175778627875E+11
+Y position 2.770654895866165E+10
+Z position 6.805107165398690E+10
+X velocity -1.884840821694723E+03
+Y velocity -1.543282039304465E+04
+Z velocity 3.380179368603502E+03
+particle ident Asteroid_7_Iris
+particle type minor_1
+particle red 180
+particle green 50
+particle blue 255
+free text empty
+particle mass 1.0E+19
+particle radius 1
+X position -3.171391709112738E+11
+Y position -3.024487905942256E+11
+Z position -2.494884207117811E+10
+X velocity 1.035896908697062E+04
+Y velocity -1.110661383852121E+04
+Z velocity 1.179380787338768E+03
+particle ident Asteroid_8_Flora
+particle type minor_1
+particle red 180
+particle green 50
+particle blue 255
+free text empty
+particle mass 3.6E+18
+particle radius 1
+X position -3.026132628205096E+11
+Y position 1.638444706610029E+11
+Z position 2.310333721834727E+10
+X velocity -1.142117831437000E+04
+Y velocity -1.532570877077301E+04
+Z velocity 1.664672973690458E+03
+particle ident Asteroid_9_Metis
+particle type minor_1
+particle red 180
+particle green 50
+particle blue 255
+free text empty
+particle mass 9E+18
+particle radius 1
+X position 3.100492483113670E+11
+Y position 1.084785922939479E+11
+Z position -2.449474726178166E+10
+X velocity -8.566776199231850E+03
+Y velocity 1.893975031003747E+04
+Z velocity 1.443452818498487E+03
+particle ident Asteroid_10_Hygiea
+particle type minor_1
+particle red 180
+particle green 50
+particle blue 255
+free text empty
+particle mass 8.6E+19
+particle radius 1
+X position 2.838059253908655E+11
+Y position 4.410900806715071E+11
+Z position 2.542336551290658E+10
+X velocity -1.254472599670359E+04
+Y velocity 8.100850923571493E+03
+Z velocity -6.919141512962987E+02
+particle ident Asteroid_11_Parthenope
+particle type minor_1
+particle red 180
+particle green 50
+particle blue 255
+free text empty
+particle mass 5.13E+18 
+particle radius 1
+X position 2.522420211330838E+11
+Y position -2.121923005230595E+11
+Z position -6.582994944484204E+09
+X velocity 1.346229478342481E+04
+Y velocity 1.604971981982148E+04
+Z velocity -1.642483431499855E+03
+particle ident Asteroid_12_Victoria
+particle type minor_1
+particle red 180
+particle green 50
+particle blue 255
+free text empty
+particle mass 	1.5E+18 
+particle radius 1
+X position -3.754038042776204E+10
+Y position 4.081930947011110E+11
+Z position -3.842952815899378E+10
+X velocity -1.618329549148954E+04
+Y velocity 5.228773323842103E+02
+Z velocity -2.003668153155669E+03
+particle ident Asteroid_14_Irene
+particle type minor_1
+particle red 180
+particle green 50
+particle blue 255
+free text empty
+particle mass 	6.3E+18 
+particle radius 1
+X position -2.236643262291997E+11
+Y position 2.541908653616605E+11
+Z position 3.825698761630449E+10
+X velocity -1.371144385494617E+04
+Y velocity -1.567325902677871E+04
+Z velocity 2.036993922231434E+03
+particle ident Asteroid_15_Eunomia
+particle type minor_1
+particle red 180
+particle green 50
+particle blue 255
+free text empty
+particle mass 	3.26E+19
+particle radius 1
+X position -3.988391932245492E+11
+Y position 1.543449279506464E+11
+Z position -6.349391374139557E+10
+X velocity -8.083417948284154E+03
+Y velocity -1.436991872291761E+04
+Z velocity -2.720094580098222E+03
+particle ident Asteroid_16_Psyche
+particle type minor_1
+particle red 180
+particle green 50
+particle blue 255
+free text empty
+particle mass 	1.7E+19
+particle radius 1
+X position -1.919458475223173E+11
+Y position -4.302129692568110E+11
+Z position 2.537849738533995E+10
+X velocity 1.531200959980268E+04
+Y velocity -4.831097128585681E+03
+Z velocity -1.830688623158725E+02
+particle ident Asteroid_17_Thetis
+particle type minor_1
+particle red 180
+particle green 50
+particle blue 255
+free text empty
+particle mass 7.6E+17
+particle radius 1
+X position 1.938888766369945E+11
+Y position -2.673347319202711E+11
+Z position -1.807859640069157E+08
+X velocity 1.795086154349991E+04
+Y velocity 1.077479193382444E+04
+Z velocity -2.042786835166140E+03
+particle ident Asteroid_18_Melpomene
+particle type minor_1
+particle red 180
+particle green 50
+particle blue 255
+free text empty
+particle mass 2.9E+18
+particle radius 1
+X position -1.812942244420550E+11,
+Y position -3.364737031180626E+11
+Z position 6.833813858008316E+10
+X velocity 1.631794363984456E+04
+Y velocity -5.405745512291816E+03
+Z velocity -5.945387295258169E+02
+particle ident Asteroid_19_Fortuna
+particle type minor_1
+particle red 180
+particle green 50
+particle blue 255
+free text empty
+particle mass 1.2E+19
+particle radius 1
+X position 1.033403160094586E+11
+Y position -3.582301732805645E+11
+Z position 9.887184536303535E+09
+X velocity 1.686084242272842E+04
+Y velocity 7.903615309605862E+03
+Z velocity 5.549896847670643E+01
+particle ident Asteroid_20_Massalia
+particle type minor_1
+particle red 180
+particle green 50
+particle blue 255
+free text empty
+particle mass 5.2E+18
+particle radius 1
+X position 3.878846984963605E+10
+Y position -4.087638714593052E+11
+Z position 4.728253514982671E+09
+X velocity 1.659152588042424E+04
+Y velocity 1.251158218938778E+03
+Z velocity 7.758251811404793E+01
+particle ident Asteroid_21_Lutetia
+particle type minor_1
+particle red 180
+particle green 50
+particle blue 255
+free text empty
+particle mass 1.3E+18
+particle radius 1
+X position 2.530979753841635E+11
+Y position 2.211485040129305E+11
+Z position -1.153202764777549E+10
+X velocity -1.114792562794652E+04
+Y velocity 1.735018357405058E+04
+Z velocity 7.356529295309180E+02
+particle ident Asteroid_22_Kalliope
+particle type minor_1
+particle red 180
+particle green 50
+particle blue 255
+free text empty
+particle mass 6.3E+18
+particle radius 1
+X position -3.960343593392247E+11
+Y position -2.486015023494189E+11
+Z position 6.385416520369553E+10
+X velocity 7.224730637758747E+03
+Y velocity -1.399410829497720E+04
+Z velocity -2.991268063288233E+03
+particle ident Asteroid_23_Thalia
+particle type minor_1
+particle red 180
+particle green 50
+particle blue 255
+free text empty
+particle mass 1.3E+18
+particle radius 1
+X position 1.587180171991798E+11
+Y position -4.473545050591986E+11
+Z position -5.721229175490415E+10
+X velocity 1.405677251848313E+04
+Y velocity 3.873090290149407E+03
+Z velocity -2.047414346343297E+03
+particle ident Asteroid_24_Themis
+particle type minor_1
+particle red 180
+particle green 50
+particle blue 255
+free text empty
+particle mass 5.75E+19
+particle radius 1.00E+03
+X position -4.093383269595770E+11
+Y position 5.337646938850013E+10
+Z position 3.745697028707754E+09
+X velocity -3.498878459272277E+03
+Y velocity -1.865193917563072E+04
+Z velocity -1.726588017609005E+02
+particle ident Asteroid_25_Phocaea
+particle type minor_1
+particle red 180
+particle green 50
+particle blue 255
+free text empty
+particle mass 4.4E+17
+particle radius 1
+X position -3.598748470708990E+11
+Y position 2.018834528801596E+11
+Z position -1.458503909754975E+11
+X velocity -6.345174470746068E+03
+Y velocity -1.371332700765076E+04
+Z velocity 3.072964281076633E+03
+particle ident Asteroid_26_Proserpina
+particle type minor_1
+particle red 180
+particle green 50
+particle blue 255
+free text empty
+particle mass 9.0E+17
+particle radius 1
+X position -3.749965818642322E+11 
+Y position 8.043299830210385E+10
+Z position 2.019241040311088E+10
+X velocity -2.489636403107782E+03 
+Y velocity -1.874011488868356E+04 
+Z velocity -7.010563948034170E+02
+particle ident Asteroid_27_Euterpe
+particle type minor_1
+particle red 180
+particle green 50
+particle blue 255
+free text empty
+particle mass 9.3E+17
+particle radius 1
+X position 9.057615665317285E+10 
+Y position 2.791835255220412E+11
+Z position -3.152753642721161E+09
+X velocity -2.218006186567436E+04
+Y velocity 6.022035755949626E+03 
+Z velocity 5.970473617212702E+02
+particle ident Asteroid_28_Bellona
+particle type minor_1
+particle red 180
+particle green 50
+particle blue 255
+free text empty
+particle mass 1.9E+18
+particle radius 1
+X position 2.070147970837433E+11
+Y position -4.261930470324482E+11
+Z position 3.751015003087445E+10
+X velocity 1.406044167371761E+04
+Y velocity 5.998749786965958E+03
+Z velocity -2.168182756063139E+03
+particle ident Asteroid_29_Amphitrite
+particle type minor_1
+particle red 180
+particle green 50
+particle blue 255
+free text empty
+particle mass 1.0E+19
+particle radius 1
+X position -2.438455935373681E+11
+Y position 2.796891114004073E+11
+Z position 2.813535894687556E+10
+X velocity -1.529017984723465E+04
+Y velocity -1.149674024551610E+04 
+Z velocity -1.324951727688948E+03
+particle ident Asteroid_30_Urania
+particle type minor_1
+particle red 180
+particle green 50
+particle blue 255
+free text empty
+particle mass 1.1E+18
+particle radius 1
+X position -6.281113492815186E+10
+Y position 3.259419992060643E+11
+Z position 5.474563230460957E+09
+X velocity -2.058311463182966E+04
+Y velocity -1.648444402404141E+03
+Z velocity -6.328550653547121E+02
+particle ident Asteroid_31_Euphrosyne
+particle type minor_1
+particle red 180
+particle green 50
+particle blue 255
+free text empty
+particle mass 1.69E+19
+particle radius 1
+X position -3.360207610639488E+11
+Y position -4.128506446321072E+11
+Z position -8.878643477246544E+10
+X velocity 9.108958679833126E+03
+Y velocity -9.331942471223106E+03
+Z velocity -6.283768941201149E+03
+particle ident Asteroid_32_Pomona
+particle type minor_1
+particle red 180
+particle green 50
+particle blue 255
+free text empty
+particle mass 5.5E+17
+particle radius 1
+X position 3.706330714709812E+11
+Y position 1.949025347431360E+11
+Z position 9.055819281765699E+09
+X velocity -8.043905471100759E+03
+Y velocity 1.495755433661258E+04
+Z velocity -1.605842008429618E+03
+particle ident Asteroid_34_Circe
+particle type minor_1
+particle red 180
+particle green 50
+particle blue 255
+free text empty
+particle mass 1.5E+18
+particle radius 1
+X position -2.029866476102456E+11
+Y position 3.005504529388968E+11
+Z position -3.034049445548254E+10
+X velocity -1.603088769424521E+04
+Y velocity -1.195167274574073E+04
+Z velocity 1.026010146380205E+03
+particle ident Asteroid_35_Leukothea
+particle type minor_1
+particle red 180
+particle green 50
+particle blue 255
+free text empty
+particle mass 1.1E+18
+particle radius 1
+X position 4.441553238335406E+11
+Y position 3.170225594973400E+11
+Z position 5.050241965784355E+10
+X velocity -8.468640976622970E+03
+Y velocity 1.069853062911963E+04
+Z velocity 1.356157453738260E+03
+particle ident Asteroid_36_Atalante
+particle type minor_1
+particle red 180
+particle green 50
+particle blue 255
+free text empty
+particle mass 1.2E+18
+particle radius 1
+X position -3.840375533305188E+11
+Y position -3.523162554234356E+11
+Z position -1.210577216675158E+11
+X velocity 9.048815490204918E+03
+Y velocity -9.058512548104883E+03
+Z velocity -2.936566847144231E+03
+particle ident Fides
+particle type minor_1
+particle red 180
+particle green 50
+particle blue 255
+free text empty
+particle mass 1.3E+18
+particle radius 1
+X position -2.233553908553047E+11
+Y position -4.050897587492498E+11
+Z position -2.006949475266489E+10
+X velocity 1.322528657439636E+04
+Y velocity -7.827856835439171E+03
+Z velocity -5.079329171101410E+02
+particle ident Asteroid_1036_Ganymed 
+particle type minor_1
+particle red 180
+particle green 50
+particle blue 255
+free text empty
+particle mass 3.3E+16
+particle radius 1
+X position -3.882936936935257E+11
+Y position 2.982038895749050E+11
+Z position -2.349995123585999E+11
+X velocity -1.113183151586430E+04
+Y velocity -5.641642571145153E+03
+Z velocity -9.488128038914576E+02
+particle ident Asteroid_65_Cybele
+particle type minor_1
+particle red 180
+particle green 50
+particle blue 255
+free text empty
+particle mass 1.4E+19
+particle radius 1
+X position 6.146125948516919E+10
+Y position -4.559428664998816E+11
+Z position 2.424275575711712E+10
+X velocity 1.769491028485040E+04
+Y velocity 1.866147646656503E+03
+Z velocity -5.567580503067211E+02
+particle ident Asteroid_243_Ida
+particle type minor_1
+particle red 180
+particle green 50
+particle blue 255
+free text empty
+particle mass 4.2E+16
+particle radius 1E+7
+X position -1.914389662641539E+11
+Y position -4.035150944102373E+11
+Z position -8.738454847886741E+09
+X velocity 1.515970191028009E+04
+Y velocity -7.296120757358747E+03
+Z velocity 5.909029603633886E+01
+particle ident Comet_1P/Halley
+particle type minor_1
+particle red 255
+particle green 178
+particle blue 127
+free text empty
+particle mass 1.7E+15
+particle radius 1
+X position -2.976965489832702E+12
+Y position 3.373043781028069E+12
+Z position -1.374490568804385E+12
+X velocity -7.758425688500039E+02 
+Y velocity 2.408313839321417E+03
+Z velocity -6.116981068409097E+02
+particle ident Voyager_1
+particle type minor_1
+particle red 255
+particle green 0
+particle blue 0
+free text empty
+particle mass 733
+particle radius 1
+X position -3.625946912401841E+12
+Y position -1.266083455593168E+13 
+Z position 9.167712043057894E+12
+X velocity -2.098940259978061E+03
+Y velocity -1.375341242279744E+04
+Z velocity 9.935637277706970E+03
+particle ident Voyager_2
+particle type minor_1
+particle red 255
+particle green 0
+particle blue 0
+free text empty
+particle mass 733
+particle radius 1
+X position 3.541866028572634E+12
+Y position -1.039577836160171E+13
+Z position -6.916209854212349E+12
+X velocity 4.289795164713816E+03
+Y velocity -9.544741921496401E+03
+Z velocity -1.147323424980270E+04
+particle ident Pioneer_10
+particle type minor_1
+particle red 255
+particle green 0
+particle blue 0
+free text empty
+particle mass 258
+particle radius 1
+X position 2.882841965452493E+12
+Y position 1.410724832964292E+13
+Z position 7.583111639722691E+11
+X velocity 1.283198908069103E+03
+Y velocity 1.201814775004192E+04
+Z velocity 6.157777742724759E+02
+particle ident Pioneer_11
+particle type minor_1
+particle red 255
+particle green 0
+particle blue 0
+free text empty
+particle mass 259
+particle radius 1
+X position 2.017729689008085E+12
+Y position -1.071894364507710E+13
+Z position 2.811690013517277E+12
+X velocity 4.129128200233303E+03
+Y velocity -1.045217705848250E+04
+Z velocity 2.524403233528885E+03
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
