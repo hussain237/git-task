@@ -1,4 +1,0 @@
-nmod:
-  script:
-   - cd src
-   - make
