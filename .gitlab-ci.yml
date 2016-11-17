@@ -1,0 +1,6 @@
+mopdev:
+script:
+- cd src
+- make clean
+- make
+- ./nmode
